@@ -1,0 +1,100 @@
+<!--Login.html-->
+<!--# Author: CL-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<title>Start Here</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<!--<link rel="stylesheet" href="/home/parallels/Desktop/Therebears/templates/css/style.css" />-->
+<link rel="stylesheet" href="css/style.css" />
+<!--&lt;!&ndash;背景图片自动更换&ndash;&gt;-->
+<!--<script src="/home/parallels/Desktop/Therebears/templates/js/jquery.wordsplit.js"></script>-->
+<!--<script src="/home/parallels/Desktop/Therebears/templates/js/jquery.min.js"></script>-->
+<!--<script src="/home/parallels/Desktop/Therebears/templates/js/supersized.3.2.7.min.js"></script>-->
+<!--<script src="/home/parallels/Desktop/Therebears/templates/js/supersized-init.js"></script>-->
+
+<script src="js/jquery.wordsplit.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/supersized.3.2.7.min.js"></script>
+<script src="js/supersized-init.js"></script>
+
+
+
+<body>
+
+<div class="login-container">
+	<h1>Start Here</h1>
+	
+	<div class="connect">
+		<p>Link the world. Share to world.</p>
+	</div>
+	
+	<form action="{{url_for('login')}}" method="post" id="login">
+		<div> 
+			<input id="username" input type="text" name="username" class="username" placeholder="Username" autocomplete="off" maxlength="16" minlength="3"/>
+		</div>
+		<div>
+			<input id="password" input type="password" name="password" class="password" placeholder="Password" autocomplete="off" maxlength="36" minlength="8"/>
+		</div>
+
+		<button id="submit" type="submit">Login</button>
+	</form>
+
+	<script>
+
+$("#submit").click(
+
+function (){
+    //获取页面中登录名和密码
+    var usern=$("#username").val();
+    var pwd=$("#password").val();
+    if(usern=="")
+ {
+  alert("Username cannot be empty")
+
+  return false;
+ }
+ if(pwd=="")
+ {
+  alert("Password cannot be empty")
+
+  return false;
+ }
+
+    //测试用户名是否符合规范
+    //用户名正则，3到16位（字母，数字，下划线，减号）
+    var uPattern = /^[a-zA-Z0-9_-]{3,16}$/;
+    if(uPattern.test(usern)==false)
+ {   alert("Username does not meet the standard,\n" +
+  " 3 to 16 alphanumeric characters\n" +
+  ", underscore, minus")
+        return false;
+ };
+    //测试密码是否符合规范
+ //密码强度检测，禁止使用弱口令，8到36位，包括至少1个字母，1个数字，1个特殊字符
+    var pPattern =/(?=.*\d)(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{8,36}/;
+    if(pPattern.test(pwd)==false)
+	{
+	    alert("It is forbidden to use weak passwords,\n" +
+			" 8 to 36 digits, including at least 1 letter,\n" +
+			"  1 digit, 1 special character:?.=")
+           return false;
+	}
+
+});
+	</script>
+
+	<a href="{{url_for('register')}}">
+		<button type="button" class="register-tis">Register</button>
+	</a>
+
+</div>
+
+</body>
+</html>
+
